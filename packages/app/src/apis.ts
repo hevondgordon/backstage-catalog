@@ -7,12 +7,16 @@ import {
   AnyApiFactory,
   configApiRef,
   createApiFactory,
+  gitlabAuthApiRef
 } from '@backstage/core-plugin-api';
 
 export const apis: AnyApiFactory[] = [
   createApiFactory({
     api: scmIntegrationsApiRef,
-    deps: { configApi: configApiRef },
+    deps: {
+      configApi: configApiRef,
+      gitlabAuthApi: gitlabAuthApiRef,
+    },
     factory: ({ configApi }) => ScmIntegrationsApi.fromConfig(configApi),
   }),
   ScmAuth.createDefaultApiFactory(),

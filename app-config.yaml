@@ -1,9 +1,9 @@
 app:
-  title: Scaffolded Backstage App
-  baseUrl: http://localhost:3000
+  title: ${APP_TITLE}
+  baseUrl: ${APP_BASE_URL}
 
 organization:
-  name: Backstage App
+  name: ${ORG_NAME}
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -22,7 +22,7 @@ backend:
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
-    origin: http://localhost:3000
+    origin: ${APP_BASE_URL}
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   # cache:
@@ -64,12 +64,14 @@ techdocs:
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
-  environment: development
+  environment: production
   providers:
     gitlab:
-      development:
+      production:
         clientId: ${GITLAB_CLIENT_ID}
         clientSecret: ${GITLAB_CLIENT_SECRET}
+        callbackUrl: ${GITLAB_CALLBACK_URL}
+        audience: ${GITLAB_AUDIENCE}
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
